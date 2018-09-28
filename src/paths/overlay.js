@@ -40,17 +40,19 @@ export default ( context ) => {
     }
   } );
 
-  module.hot.accept(
-    [
-      '../shaders/quad.vert',
-      '../shaders/overlay.frag'
-    ],
-    () => {
-      glCatPath.replaceProgram(
-        'overlay',
-        require( '../shaders/quad.vert' ),
-        require( '../shaders/overlay.frag' )
-      );
-    }
-  );
+  if ( module.hot ) {
+    module.hot.accept(
+      [
+        '../shaders/quad.vert',
+        '../shaders/overlay.frag'
+      ],
+      () => {
+        glCatPath.replaceProgram(
+          'overlay',
+          require( '../shaders/quad.vert' ),
+          require( '../shaders/overlay.frag' )
+        );
+      }
+    );
+  }
 };

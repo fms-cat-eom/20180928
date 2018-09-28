@@ -48,17 +48,19 @@ export default ( context ) => {
     }
   } );
 
-  module.hot.accept(
-    [
-      '../shaders/box.vert',
-      '../shaders/box.frag'
-    ],
-    () => {
-      glCatPath.replaceProgram(
-        'box',
-        require( '../shaders/box.vert' ),
-        require( '../shaders/box.frag' )
-      );
-    }
-  );
+  if ( module.hot ) {
+    module.hot.accept(
+      [
+        '../shaders/box.vert',
+        '../shaders/box.frag'
+      ],
+      () => {
+        glCatPath.replaceProgram(
+          'box',
+          require( '../shaders/box.vert' ),
+          require( '../shaders/box.frag' )
+        );
+      }
+    );
+  }
 };
